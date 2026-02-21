@@ -1,6 +1,8 @@
 package com.keycload.book.network.book;
 
 import com.keycload.book.network.history.BookTransactionHistory;
+import com.keycload.book.network.utility.FileStorageService;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,6 +27,7 @@ public class BookMapper {
                 .synopsis(book.getSynopsis())
                 .rate(book.getRate())
                 .owner(book.getOwner().fullName())
+                .cover(FileStorageService.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 

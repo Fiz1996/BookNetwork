@@ -1,12 +1,12 @@
 package com.keycload.book.network.history;
 
-import com.keycload.book.network.book.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
 public interface BookTransactionHistoryRepository extends JpaRepository<BookTransactionHistory,Integer> {
     @Query("""
@@ -32,4 +32,25 @@ public interface BookTransactionHistoryRepository extends JpaRepository<BookTran
              AND bookTransactionHistory.returnApproved = false
             """)
     boolean isAlreadyBorrowedByUser(Integer bookId, Integer id);
+
+
+    @Query("""
+            SELECT transaction 
+            FROM BookTransactionHistory transaction 
+            WHERE transaction.user.id = :userId
+            AND transaction.book.id = :bookId
+            AND transaction.returnApproved = false                                                                    
+            """)
+    Optional<BookTransactionHistory> findByBookIdAndUserId(Integer bookId, Integer userId);
+
+    @Query("""
+            SELECT transaction 
+            FROM BookTransactionHistory transaction 
+            WHERE transaction.book.id = :bookId
+            AND transaction.user.id = :userId
+            AND  transaction.returned = true
+            AND transaction.returnApproved = false                                    
+            """
+    )
+    Optional<BookTransactionHistory> findByBookIdAndOwner(Integer bookId, Integer id);
 }
