@@ -4,7 +4,6 @@ import com.keycload.book.network.book.Book;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -70,16 +69,11 @@ public class FileStorageService {
     }
 
     public static byte[] readFileFromLocation(String fileUrl) {
+        return null;
+    }
 
-        if(StringUtils.isBlank(fileUrl)){
-            return null;
-        }
-        try {
-            Path filePath = new File(fileUrl).toPath();
-            return Files.readAllBytes(filePath);
-        } catch (Exception e) {
-            log.error("Failed to read file {}", fileUrl);
-        }
-        return new byte[0];
+    public String saveFile(MultipartFile file, Integer id) {
+        final String fileUploadSubPath = "users" + File.separator + id;
+        return uploadFile(file, fileUploadSubPath);
     }
 }

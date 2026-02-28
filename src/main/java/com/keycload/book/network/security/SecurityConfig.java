@@ -32,11 +32,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests( req->
                         req.requestMatchers(
                                 "/auth/**",
-                                "/v2/aip-docs",
-                                "/v3/aip-docs",
+                                "/v2/api-docs",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/configuration/ui",
                                 "/configuration/security",
-                                "/webjars/**",
-                                "/swagger-ui.html"
+                                "/webjars/**"
                         ).permitAll()
                                 .anyRequest()
                                     .authenticated()

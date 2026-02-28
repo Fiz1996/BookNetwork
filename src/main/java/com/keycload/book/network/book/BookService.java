@@ -216,8 +216,8 @@ public class BookService {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new EntityNotFoundException("No book found with the ID:: " + bookId));
         User user = ((User) connectedUser.getPrincipal());
-        fileStorageService.saveFIle(file,book,user.getId());
-        book.setBookCover(bookCover);
+        String profilePicture = fileStorageService.saveFile(file,user.getId());
+        book.setBookCover(profilePicture);
         bookRepository.save(book);
 
 
