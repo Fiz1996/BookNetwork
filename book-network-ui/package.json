@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "api-gen" : "ng-openapi-gen --input ./openapi/openapi.json --output ./src/app/services",
     "test": "ng test"
   },
   "prettier": {
@@ -30,6 +31,7 @@
     "@angular/router": "^20.3.0",
     "@fortawesome/free-regular-svg-icons": "^7.2.0",
     "bootstrap": "^5.3.3",
+    "ng-openapi-gen": "^1.0.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
